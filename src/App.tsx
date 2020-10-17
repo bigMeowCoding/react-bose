@@ -1,11 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "antd-mobile/dist/antd-mobile.css";
+import { Button } from "antd-mobile"; // or 'antd-mobile/dist/antd-mobile.less'
 
 function App() {
   return (
     <div className="App">
       app
+      <Button type="primary">mobile dbtn</Button>
     </div>
   );
 }
