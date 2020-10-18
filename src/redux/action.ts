@@ -11,3 +11,11 @@ export function minusNumber() {
     type: Minus,
   };
 }
+
+export function asyncAddNumber() {
+  return (dispatch: any) => {
+    setTimeout(() => {
+      dispatch(addNumber());
+    }, 2000);
+  };
+}

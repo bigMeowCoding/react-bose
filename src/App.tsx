@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "antd-mobile";
-import { createStore } from "redux";
-import { counter } from "./redux/reduce";
-import { addNumber, minusNumber } from "./redux/action"; // or 'antd-mobile/dist/antd-mobile.less'
 
-const store = createStore(counter);
-let init = store.getState();
-console.log(init);
-function App() {
-  const [data, setData] = useState(init);
-  store.subscribe(() => {
-    init = store.getState();
-    setData(init);
-  });
+function App(props: {
+  store: any;
+  addNumber: any;
+  asyncAddNumber: (dispatch?: any) => any;
+  minusNumber: () => any;
+}) {
+  const store = props.store;
+  let init = store.getState();
   return (
     <div className="App">
-      {data}
+      {init}
       <Button
         type="primary"
         onClick={() => {
-          store.dispatch(addNumber());
+          store.dispatch(props.addNumber());
         }}
       >
         add
@@ -27,10 +23,18 @@ function App() {
       <Button
         type="primary"
         onClick={() => {
-          store.dispatch(minusNumber());
+          store.dispatch(props.minusNumber());
         }}
       >
         remove
+      </Button>
+      <Button
+        type="primary"
+        onClick={() => {
+          store.dispatch(props.asyncAddNumber());
+        }}
+      >
+        async add
       </Button>
     </div>
   );
