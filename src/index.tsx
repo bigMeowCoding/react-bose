@@ -8,16 +8,44 @@ import { Provider } from "react-redux";
 
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};
 const store = createStore(counter, compose(applyMiddleware(thunk), devTool));
 
 render();
+function About() {
+  return <div>about</div>;
+}
+function Dashboard() {
+  return <div>dashboard</div>;
+}
 function render() {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+        </ul>
+        <Route path="/" exact>
+          <App />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>{" "}
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+      </BrowserRouter>
     </Provider>,
     document.getElementById("root")
   );
