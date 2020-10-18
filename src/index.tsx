@@ -4,24 +4,21 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { counter } from "./redux/reduce";
+import { Provider } from "react-redux";
+
 import { applyMiddleware, compose, createStore } from "redux";
-import { addNumber, asyncAddNumber, minusNumber } from "./redux/action";
 import thunk from "redux-thunk";
-// @ts-ignore
-const devTool = window.devToolsExtension ? window.devToolsExtension() : () => {};
+const devTool = (window as any).devToolsExtension
+  ? (window as any).devToolsExtension()
+  : () => {};
 const store = createStore(counter, compose(applyMiddleware(thunk), devTool));
 
 render();
 function render() {
   ReactDOM.render(
-    <React.StrictMode>
-      <App
-        store={store}
-        asyncAddNumber={asyncAddNumber}
-        minusNumber={minusNumber}
-        addNumber={addNumber}
-      />
-    </React.StrictMode>,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById("root")
   );
 }

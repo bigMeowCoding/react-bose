@@ -1,43 +1,35 @@
 import React from "react";
 import { Button } from "antd-mobile";
+import { connect } from "react-redux";
+import { addNumber, asyncAddNumber, minusNumber } from "./redux/action";
 
 function App(props: {
-  store: any;
-  addNumber: any;
-  asyncAddNumber: (dispatch?: any) => any;
-  minusNumber: () => any;
+  num?: number;
+  addNumber?: any;
+  asyncAddNumber?: (dispatch?: any) => any;
+  minusNumber?: () => any;
 }) {
-  const store = props.store;
-  let init = store.getState();
   return (
     <div className="App">
-      {init}
-      <Button
-        type="primary"
-        onClick={() => {
-          store.dispatch(props.addNumber());
-        }}
-      >
+      {props.num}
+      <Button type="primary" onClick={props.addNumber}>
         add
       </Button>
-      <Button
-        type="primary"
-        onClick={() => {
-          store.dispatch(props.minusNumber());
-        }}
-      >
+      <Button type="primary" onClick={props.minusNumber}>
         remove
       </Button>
-      <Button
-        type="primary"
-        onClick={() => {
-          store.dispatch(props.asyncAddNumber());
-        }}
-      >
+      <Button type="primary" onClick={props.asyncAddNumber}>
         async add
       </Button>
     </div>
   );
 }
-
-export default App;
+function mapStateToProps(state: any) {
+  return { num: state };
+}
+const actionCreators = {
+  addNumber,
+  asyncAddNumber,
+  minusNumber,
+};
+export default connect(mapStateToProps, actionCreators)(App);
