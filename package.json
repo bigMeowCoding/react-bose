@@ -16,12 +16,13 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
+    "redux": "^4.0.5",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "server": "nodemon server/server.ts",
     "eject": "react-scripts eject"
   },
@@ -47,8 +48,11 @@
     "@babel/register": "^7.12.1",
     "@types/express": "^4.17.8",
     "@types/mongoose": "^5.7.36",
+    "babel-plugin-import": "^1.13.1",
+    "customize-cra": "^1.0.0",
     "express": "^4.17.1",
     "node-ts": "^5.0.9",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "react-app-rewired": "^2.1.6"
   }
 }
