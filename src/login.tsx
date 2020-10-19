@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Button } from "antd-mobile";
 import { connect } from "react-redux";
 import { login } from "./redux/action";
-import { StoreState } from "../libs/interface";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import { StoreState } from "@lib/interface";
 function Login(props: any) {
   useEffect(() => {
     axios.get("/data").then(
