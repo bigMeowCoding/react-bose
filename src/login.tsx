@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "antd-mobile";
 import { connect } from "react-redux";
 import { login } from "./redux/action";
 import { StoreState } from "../libs/interface";
 import { Redirect } from "react-router-dom";
-
+import axios from "axios";
 function Login(props: any) {
+  useEffect(() => {
+    axios.get("/data").then(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }, []);
   return (
     <div>
       {props.auth && props.auth.isAuth ? (

@@ -1,7 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 const DB_URL = "mongodb://localhost:27017/bose";
 const app = express();
 mongoose.connect(DB_URL, { useNewUrlParser: true });
