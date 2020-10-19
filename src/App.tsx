@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "antd-mobile";
 import { connect } from "react-redux";
 import { addNumber, asyncAddNumber, minusNumber } from "./redux/action";
+import { StoreState } from "../libs/interface";
 
 function App(props: {
   num?: number;
@@ -24,8 +25,8 @@ function App(props: {
     </div>
   );
 }
-function mapStateToProps(state: any) {
-  return { num: state };
+function mapStateToProps(state: StoreState) {
+  return { num: state.counter };
 }
 const actionCreators = {
   addNumber,

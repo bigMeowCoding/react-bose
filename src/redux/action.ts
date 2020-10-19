@@ -1,4 +1,4 @@
-import { Add, Minus } from "./actionType";
+import { Add, LOGIN, LOGOUT, Minus } from "./actionType";
 
 export function addNumber() {
   return {
@@ -17,5 +17,15 @@ export function asyncAddNumber() {
     setTimeout(() => {
       dispatch(addNumber());
     }, 2000);
+  };
+}
+export function login() {
+  return {
+    type: LOGIN,
+  };
+}
+export function logout() {
+  return {
+    type: LOGOUT,
   };
 }
