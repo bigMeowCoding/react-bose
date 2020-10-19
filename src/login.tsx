@@ -3,11 +3,12 @@ import { Button } from "antd-mobile";
 import { connect } from "react-redux";
 import { login } from "./redux/action";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
 import { StoreState } from "@lib/interface";
+import {service} from "./http-util/axios";
+
 function Login(props: any) {
   useEffect(() => {
-    axios.get("/data").then(
+    service.get("/data").then(
       (data) => {
         console.log(data);
       },
