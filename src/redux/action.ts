@@ -1,8 +1,7 @@
 import {
   Add,
   ERROR_MSG,
-  LOGIN,
-  LOGOUT,
+  LOGIN_SUCCESS,
   Minus,
   REGISTER_SUCCESS,
 } from "./actionType";
@@ -28,16 +27,6 @@ export function asyncAddNumber() {
     }, 2000);
   };
 }
-export function login() {
-  return {
-    type: LOGIN,
-  };
-}
-export function logout() {
-  return {
-    type: LOGOUT,
-  };
-}
 
 export function registerSuccess(data: {
   name: string;
@@ -46,6 +35,16 @@ export function registerSuccess(data: {
 }) {
   return {
     type: REGISTER_SUCCESS,
+    payload: data,
+  };
+}
+export function loginSuccess(data: {
+  name: string;
+  pwd: string;
+  type: UserType;
+}) {
+  return {
+    type: LOGIN_SUCCESS,
     payload: data,
   };
 }
@@ -68,6 +67,24 @@ export function register(param: UserInfoParam) {
   return (dispatch: any) => {
     // 异步请求
     service.post(`/user/register`, { name, pwd, type }).then((res) => {
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch(registerSuccess({ name, pwd, type }));
+      } else {
+        dispatch(errorMessage(res.data.msg));
+      }
+    });
+  };
+}
+
+export function login(param: UserInfoParam) {
+  const { name, pwd, type } = param;
+  if (!name || !pwd || !type) {
+    return errorMessage("用户密码必须输入！");
+  }
+
+  return (dispatch: any) => {
+    // 异步请求
+    service.post(`/user/login`, { name, pwd, type }).then((res) => {
       if (res.status === 200 && res.data.code === 0) {
         dispatch(registerSuccess({ name, pwd, type }));
       } else {

@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Login } from "./container/login/login";
+import { BrowserRouter, Route } from "react-router-dom";
+import Login from "./container/login/login";
 import Register from "./container/register/register";
 import reducer from "./reducer";
 import { AuthRoute } from "./component/auth-route/auth-auth";

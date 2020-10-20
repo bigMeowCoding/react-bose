@@ -2,7 +2,6 @@ import { Redirect, Route, useParams } from "react-router-dom";
 import App from "./App";
 import React from "react";
 import { connect } from "react-redux";
-import { login, logout } from "./redux/action";
 import { Button } from "antd-mobile";
 import { StoreState } from "../libs/interface";
 function About() {
@@ -38,5 +37,4 @@ function mapStateToProps(state: StoreState) {
 }
 
 export default connect(mapStateToProps, {
-  logout: logout,
 })(Dashboard);

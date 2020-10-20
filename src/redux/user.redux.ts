@@ -1,4 +1,4 @@
-import { ERROR_MSG, REGISTER_SUCCESS } from "./actionType";
+import { ERROR_MSG, LOGIN_SUCCESS, REGISTER_SUCCESS } from "./actionType";
 import {
   UserInfoParam,
   UserState,
@@ -19,6 +19,14 @@ export default function user(
 ) {
   switch (action.type) {
     case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isAuth: true,
+        msg: "",
+        redirectTo: getRedirectPath(state.type, action.payload.avatar),
+        ...action.payload,
+      };
+    case LOGIN_SUCCESS:
       return {
         ...state,
         isAuth: true,

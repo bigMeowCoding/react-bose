@@ -175,5 +175,5 @@
       "transform-decorators-legacy"
     ]
   },
-  "proxy": "http://localhost:9093"
+  "proxy": "http://127.0.0.1:9093"
 }

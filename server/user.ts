@@ -31,5 +31,23 @@ Router.post("/register", (req, res) => {
     });
   });
 });
-
+Router.post("/login", (req, res) => {
+  const { name, pwd, type } = req.body;
+  User.findOne(
+    { name, pwd: md5PwdEncryption(pwd) },
+    { pwd: 0 },
+    (error, doc) => {
+      if (!doc) {
+        return res.json({
+          code: HttpStatus.BusinessError,
+          msg: "用户名或者密码错误",
+        });
+      }
+      return res.json({
+        code: HttpStatus.Ok,
+        data: doc,
+      });
+    }
+  );
+});
 export default Router;
