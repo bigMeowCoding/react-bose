@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Login } from "./container/login/login";
 import Register from "./container/register/register";
 import reducer from "./reducer";
+import { AuthRoute } from "./component/auth-route/auth-auth";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};
@@ -18,10 +19,9 @@ const store = createStore(reducer, compose(applyMiddleware(thunk), devTool));
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/register" component={Register}></Route>
-      </Switch>
+      <AuthRoute></AuthRoute>
+      <Route path="/login" component={Login}></Route>
+      <Route path="/register" component={Register}></Route>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

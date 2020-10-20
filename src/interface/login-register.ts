@@ -15,4 +15,5 @@ export interface UserState {
   type: UserType;
   msg: string;
   isAuth: boolean;
+  redirectTo: string;
 }

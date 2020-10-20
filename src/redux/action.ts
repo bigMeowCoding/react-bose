@@ -67,7 +67,6 @@ export function register(param: UserInfoParam) {
   }
   return (dispatch: any) => {
     // 异步请求
-    // axios.get('/uer/list')
     service.post(`/user/register`, { name, pwd, type }).then((res) => {
       if (res.status === 200 && res.data.code === 0) {
         dispatch(registerSuccess({ name, pwd, type }));

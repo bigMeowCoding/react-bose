@@ -4,12 +4,14 @@ import {
   UserState,
   UserType,
 } from "../interface/login-register";
-const initState = {
+import getRedirectPath from "../utils/getRedirectPath";
+const initState: UserState = {
   isAuth: false,
   msg: "",
   name: "",
   pwd: "",
   type: UserType.genius,
+  redirectTo: "",
 };
 export default function user(
   state: UserState = initState,
@@ -21,6 +23,7 @@ export default function user(
         ...state,
         isAuth: true,
         msg: "",
+        redirectTo: getRedirectPath(state.type, action.payload.avatar),
         ...action.payload,
       };
     case ERROR_MSG:

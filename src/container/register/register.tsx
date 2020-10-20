@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import RadioItem from "antd-mobile/es/radio/RadioItem";
-import { UserInfoParam } from "../../interface/login-register";
+import { UserInfoParam, UserState } from "../../interface/login-register";
 import { Logo } from "../../component/logo/logo";
 import { StoreState } from "@lib/interface";
 import { register } from "../../redux/action";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-function Register(props: any) {
+function Register(props: { user: UserState; [key: string]: any }) {
   const [param, setParam] = useState<UserInfoParam>({
     ...props.user,
+    repeatPwd: "",
   });
 
   function registerHandle(param: UserInfoParam) {
@@ -24,6 +26,9 @@ function Register(props: any) {
   }
   return (
     <div className="register">
+      {props.user && props.user.redirectTo ? (
+        <Redirect to={props.user.redirectTo}></Redirect>
+      ) : null}
       <Logo></Logo>
       <List>
         <InputItem
