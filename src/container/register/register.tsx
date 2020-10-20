@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import RadioItem from "antd-mobile/es/radio/RadioItem";
-import { UserInfoParam, UserType } from "../../interface/login-register";
+import { UserInfoParam } from "../../interface/login-register";
 import { Logo } from "../../component/logo/logo";
 import { StoreState } from "@lib/interface";
-import {
-  addNumber,
-  asyncAddNumber,
-  minusNumber,
-  register,
-} from "../../redux/action";
+import { register } from "../../redux/action";
 import { connect } from "react-redux";
 
 function Register(props: any) {
@@ -20,6 +15,7 @@ function Register(props: any) {
   function registerHandle(param: UserInfoParam) {
     props.register(param);
   }
+
   function changeHandle(type: any, value: any) {
     setParam({
       ...param,
