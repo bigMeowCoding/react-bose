@@ -1,6 +1,7 @@
 import express from "express";
 import model from "./model";
 import { HttpStatus } from "../src/interface/http";
+import { md5PwdEncryption } from "../src/utils/md5Pwd";
 
 const Router = express.Router();
 const User = model.getModel("user");
@@ -18,7 +19,7 @@ Router.post("/register", (req, res) => {
     if (doc) {
       return res.json({ code: HttpStatus.BusinessError, msg: "用户名重复" });
     }
-    User.create({ name, pwd, type }, (e, d) => {
+    User.create({ name, pwd: md5PwdEncryption(pwd), type }, (e, d) => {
       if (e) {
         return res.json({
           code: HttpStatus.BusinessError,
