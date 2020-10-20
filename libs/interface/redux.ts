@@ -1,3 +1,5 @@
+import { UserState } from "../../src/interface/login-register";
+
 export interface StoreState {
   counter: number;
   auth: {
@@ -5,4 +7,5 @@ export interface StoreState {
     user: string;
     age: number;
   };
+  user: UserState;
 }

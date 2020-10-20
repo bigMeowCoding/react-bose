@@ -1,39 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { counter } from "./redux/reduce";
 import { Provider } from "react-redux";
 
-import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  useParams,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import { auth } from "./redux/auth.reduce";
-import Login from "./login";
-import  Dashboard  from "./dashboard";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Login } from "./container/login/login";
+import Register from "./container/register/register";
+import reducer from "./reducer";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};
-const store = createStore(
-  combineReducers({ counter, auth }),
-  compose(applyMiddleware(thunk), devTool)
-);
+const store = createStore(reducer, compose(applyMiddleware(thunk), devTool));
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
         <Route path="/login" component={Login}></Route>
-        <Route path="/dashboard" component={Dashboard}></Route>
-        <Redirect to="/login"></Redirect>
+        <Route path="/register" component={Register}></Route>
       </Switch>
     </BrowserRouter>
   </Provider>,
