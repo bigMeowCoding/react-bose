@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../common/styles/common.scss";
 import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import RadioItem from "antd-mobile/es/radio/RadioItem";
 import { UserInfoParam, UserState } from "../../interface/login-register";
@@ -70,7 +71,9 @@ function Register(props: { user: UserState; [key: string]: any }) {
           老板
         </RadioItem>
         <WhiteSpace />
-        {props.user && props.user.msg ? <p>{props.msg}</p> : null}
+        {props.user && props.user.msg ? (
+          <p className={"error-message"}>{props.user.msg}</p>
+        ) : null}
         <Button
           type="primary"
           onClick={() => {
