@@ -41,7 +41,7 @@ export function registerSuccess(data: {
   type: UserType;
 }) {
   return {
-    type: REGISTER_SUCCESS,
+    type: AUTH_SUCCESS,
     payload: data,
   };
 }
@@ -51,7 +51,7 @@ export function loginSuccess(data: {
   type: UserType;
 }) {
   return {
-    type: LOGIN_SUCCESS,
+    type: AUTH_SUCCESS,
     payload: data,
   };
 }
