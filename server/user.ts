@@ -5,26 +5,57 @@ import { md5PwdEncryption } from "../src/utils/md5Pwd";
 
 const Router = express.Router();
 const User = model.getModel("user");
-
+const _filterPwd = { pwd: 0 };
 Router.get("/list", (req, res) => {
   User.find({}, (err, doc) => {
     return res.json(doc);
   });
 });
 
+Router.get("/info", (req, res) => {
+  const id = req.cookies["userId"];
+  if (!id) {
+    res.json({
+      code: HttpStatus.BusinessError,
+      msg: "未登陆用户",
+    });
+  }
+  User.findOne(
+    {
+      _id: id,
+    },
+    _filterPwd,
+    (e, doc) => {
+      if (e) {
+        return res.json({
+          code: HttpStatus.BusinessError,
+          msg: "后端出现问题",
+        });
+      }
+      if (doc) {
+        return res.json({
+          code: HttpStatus.Ok,
+          data: doc,
+        });
+      }
+    }
+  );
+});
 Router.post("/register", (req, res) => {
   const { name, pwd, type } = req.body;
   User.findOne({ name }, (error, doc) => {
     if (doc) {
       return res.json({ code: HttpStatus.BusinessError, msg: "用户名重复" });
     }
-    User.create({ name, pwd: md5PwdEncryption(pwd), type }, (e, d) => {
+    User.create({ name, pwd: md5PwdEncryption(pwd), type }, (e, d: any) => {
       if (e) {
         return res.json({
           code: HttpStatus.BusinessError,
           msg: "服务器错误",
         });
       }
+      res.cookie("userId", d._id);
+      console.log(d);
       return res.json({
         code: HttpStatus.Ok,
       });
@@ -35,7 +66,7 @@ Router.post("/login", (req, res) => {
   const { name, pwd, type } = req.body;
   User.findOne(
     { name, pwd: md5PwdEncryption(pwd) },
-    { pwd: 0 },
+    _filterPwd,
     (error, doc) => {
       if (!doc) {
         return res.json({

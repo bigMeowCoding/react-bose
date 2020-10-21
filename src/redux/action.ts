@@ -1,12 +1,14 @@
 import {
   Add,
   ERROR_MSG,
+  LOAD_DATA,
   LOGIN_SUCCESS,
   Minus,
   REGISTER_SUCCESS,
 } from "./actionType";
 import { UserInfoParam, UserType } from "../interface/login-register";
 import { service } from "../http-util/axios";
+import { useHistory } from "react-router-dom";
 
 export function addNumber() {
   return {
@@ -87,6 +89,26 @@ export function login(param: UserInfoParam) {
     service.post(`/user/login`, { name, pwd, type }).then((res) => {
       if (res.status === 200 && res.data.code === 0) {
         dispatch(registerSuccess({ name, pwd, type }));
+      } else {
+        dispatch(errorMessage(res.data.msg));
+      }
+    });
+  };
+}
+export function loadData(data: any) {
+  return {
+    type: LOAD_DATA,
+    payload: data,
+  };
+}
+
+export function userInfo() {
+
+  return (dispatch: any) => {
+    // 异步请求
+    service.get(`/user/info`).then((res) => {
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch(loadData(res.data.data));
       } else {
         dispatch(errorMessage(res.data.msg));
       }

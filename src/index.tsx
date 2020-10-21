@@ -9,7 +9,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Login from "./container/login/login";
 import Register from "./container/register/register";
 import reducer from "./reducer";
-import { AuthRoute } from "./component/auth-route/auth-auth";
+import AuthRoute  from "./component/auth-route/auth-auth";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};

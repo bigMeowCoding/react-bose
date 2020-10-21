@@ -1,0 +1,7 @@
+const {createProxyMiddleware} = require('http-proxy-middleware');
+
+module.exports = function (app,server) {
+    app.use(createProxyMiddleware('/user/*', {
+        target: 'http://127.0.0.1:9093',
+    }));
+};

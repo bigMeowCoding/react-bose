@@ -1,4 +1,9 @@
-import { ERROR_MSG, LOGIN_SUCCESS, REGISTER_SUCCESS } from "./actionType";
+import {
+  ERROR_MSG,
+  LOAD_DATA,
+  LOGIN_SUCCESS,
+  REGISTER_SUCCESS,
+} from "./actionType";
 import {
   UserInfoParam,
   UserState,
@@ -32,6 +37,11 @@ export default function user(
         isAuth: true,
         msg: "",
         redirectTo: getRedirectPath(state.type, action.payload.avatar),
+        ...action.payload,
+      };
+    case LOAD_DATA:
+      return {
+        ...state,
         ...action.payload,
       };
     case ERROR_MSG:

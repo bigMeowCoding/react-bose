@@ -7,3 +7,4 @@ export const REGISTER_SUCCESS = "success";
 export const LOGIN_SUCCESS = "loginSuccess";
 
 export const ERROR_MSG = "errorMsg";
+export const LOAD_DATA = "loadData";
