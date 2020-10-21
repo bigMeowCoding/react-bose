@@ -1,4 +1,5 @@
 import {
+  AUTH_SUCCESS,
   ERROR_MSG,
   LOAD_DATA,
   LOGIN_SUCCESS,
@@ -23,20 +24,12 @@ export default function user(
   action: { type: any; payload: any; msg: any }
 ) {
   switch (action.type) {
-    case REGISTER_SUCCESS:
+    case AUTH_SUCCESS:
       return {
         ...state,
         isAuth: true,
         msg: "",
-        redirectTo: getRedirectPath(state.type, action.payload.avatar),
-        ...action.payload,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isAuth: true,
-        msg: "",
-        redirectTo: getRedirectPath(state.type, action.payload.avatar),
+        redirectTo: getRedirectPath(action.payload.type, action.payload.avatar),
         ...action.payload,
       };
     case LOAD_DATA:

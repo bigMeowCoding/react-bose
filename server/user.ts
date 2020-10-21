@@ -81,4 +81,28 @@ Router.post("/login", (req, res) => {
     }
   );
 });
+
+Router.post("/update", (req, res) => {
+  const { name, pwd, type } = req.body;
+  const id = req.cookies["userId"];
+  if (!id) {
+    res.json({
+      code: HttpStatus.BusinessError,
+    });
+  }
+  const body = req.body;
+  User.findByIdAndUpdate(id, body, (error, doc: any) => {
+    return res.json({
+      code: HttpStatus.Ok,
+      data: Object.assign(
+        {},
+        {
+          name: doc.name,
+          type: doc.type,
+        },
+        body
+      ),
+    });
+  });
+});
 export default Router;

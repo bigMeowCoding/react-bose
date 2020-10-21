@@ -27,4 +27,5 @@ function mapStateToProps(state: StoreState) {
 const actionCreators = {
   loadData,
 };
+
 export default connect(mapStateToProps, actionCreators)(AuthRoute);

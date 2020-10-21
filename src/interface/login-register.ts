@@ -17,3 +17,11 @@ export interface UserState {
   isAuth: boolean;
   redirectTo: string;
 }
+
+export interface PerfectUserInfoParam {
+  title: string;
+  company: string;
+  money: string;
+  desc: string;
+  avatar: string;
+}

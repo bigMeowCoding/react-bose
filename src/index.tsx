@@ -9,7 +9,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Login from "./container/login/login";
 import Register from "./container/register/register";
 import reducer from "./reducer";
-import AuthRoute  from "./component/auth-route/auth-auth";
+import AuthRoute from "./component/auth-route/auth-auth";
+import BossInfo from "./container/bossinfo/bossinfo";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};
@@ -21,6 +22,7 @@ ReactDOM.render(
       <AuthRoute></AuthRoute>
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
+      <Route path="/bossinfo" component={BossInfo}></Route>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
