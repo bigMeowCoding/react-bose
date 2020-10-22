@@ -2,13 +2,13 @@ import React from "react";
 import { TabBar } from "antd-mobile";
 import { NavbarItem } from "../../common/interface/navbar";
 import { useLocation, useHistory } from "react-router-dom";
-
+import "./nav-link.scss";
 export function NavLinkBar(props: any) {
   const { navList } = props;
   const location = useLocation(),
     history = useHistory();
   return (
-    <TabBar>
+    <TabBar className="fixed-bar">
       {navList.map((v: NavbarItem) => (
         <TabBar.Item
           key={v.path}

@@ -7,7 +7,7 @@ import { NavBar } from "antd-mobile";
 import { useLocation, Switch, Route } from "react-router-dom";
 import { NavbarItem } from "../../common/interface/navbar";
 import { NavLinkBar } from "../nav-link/nav-link";
-
+import "./dashboard.scss";
 function Boss() {
   return <div>boss</div>;
 }
@@ -56,11 +56,11 @@ function Dashboard(props: any) {
   ];
   const location = useLocation();
   return (
-    <div>
+    <div className="dashboard">
       <NavBar mode="dark">
         {navList.find((v) => v.path === location.pathname)?.title}
       </NavBar>
-      <div style={{ marginTop: 45 }}>
+      <div style={{ marginTop: 45 }} className="content">
         <Switch>
           {navList.map((v) => (
             <Route key={v.path} path={v.path} component={v.component}></Route>
