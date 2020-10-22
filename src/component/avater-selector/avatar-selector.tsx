@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, List } from "antd-mobile";
-import { HeadIcon } from "../../interface";
+import { HeadIcon } from "../../common/interface";
 
 export function AvatarSelector(props: {
   selectAvatar: Function;

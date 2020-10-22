@@ -9,7 +9,7 @@ import {
   UserInfoParam,
   UserState,
   UserType,
-} from "../interface/login-register";
+} from "../common/interface/login-register";
 import getRedirectPath from "../utils/getRedirectPath";
 const initState: UserState = {
   isAuth: false,

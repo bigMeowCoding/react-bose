@@ -1,4 +1,4 @@
-import { UserState } from "../../src/interface/login-register";
+import { UserState } from "../../src/common/interface/login-register";
 
 export interface StoreState {
   counter: number;

@@ -4,7 +4,7 @@ import { errorMessage, loadData, login, userInfo } from "../../redux/action";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { service } from "../../http-util/axios";
-import {HttpStatus} from "../../interface/http";
+import {HttpStatus} from "../../common/interface/http";
 
 function AuthRoute(props: any) {
   const history = useHistory();

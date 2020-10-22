@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Logo } from "../../component/logo/logo";
 import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import { Redirect, useHistory } from "react-router-dom";
-import { UserInfoParam } from "../../interface/login-register";
+import { UserInfoParam } from "../../common/interface/login-register";
 import { StoreState } from "@lib/interface";
 import { login } from "../../redux/action";
 import { connect } from "react-redux";

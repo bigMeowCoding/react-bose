@@ -4,7 +4,7 @@ import { AvatarSelector } from "../../component/avater-selector/avatar-selector"
 import { StoreState } from "@lib/interface";
 import { update } from "../../redux/action";
 import { connect } from "react-redux";
-import { HeadIcon } from "../../interface";
+import { HeadIcon } from "../../common/interface";
 import { Redirect, useLocation } from "react-router-dom";
 
 function BossInfo(props: any) {

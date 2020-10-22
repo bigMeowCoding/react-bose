@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../common/styles/common.scss";
 import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import RadioItem from "antd-mobile/es/radio/RadioItem";
-import { UserInfoParam, UserState } from "../../interface/login-register";
+import { UserInfoParam, UserState } from "../../common/interface/login-register";
 import { Logo } from "../../component/logo/logo";
 import { StoreState } from "@lib/interface";
 import { register } from "../../redux/action";

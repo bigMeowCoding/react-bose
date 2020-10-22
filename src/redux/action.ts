@@ -11,7 +11,7 @@ import {
   PerfectUserInfoParam,
   UserInfoParam,
   UserType,
-} from "../interface/login-register";
+} from "../common/interface/login-register";
 import { service } from "../http-util/axios";
 import { useHistory } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import express from "express";
 import model from "./model";
-import { HttpStatus } from "../src/interface/http";
+import { HttpStatus } from "../src/common/interface/http";
 import { md5PwdEncryption } from "../src/utils/md5Pwd";
 
 const Router = express.Router();
