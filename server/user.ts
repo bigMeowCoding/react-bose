@@ -63,17 +63,19 @@ Router.post("/register", (req, res) => {
   });
 });
 Router.post("/login", (req, res) => {
-  const { name, pwd, type } = req.body;
+  const { name, pwd } = req.body;
   User.findOne(
     { name, pwd: md5PwdEncryption(pwd) },
     _filterPwd,
-    (error, doc) => {
+    (error, doc:any) => {
       if (!doc) {
         return res.json({
           code: HttpStatus.BusinessError,
           msg: "用户名或者密码错误",
         });
       }
+      res.cookie("userId", doc._id);
+
       return res.json({
         code: HttpStatus.Ok,
         data: doc,
@@ -86,7 +88,7 @@ Router.post("/update", (req, res) => {
   const { name, pwd, type } = req.body;
   const id = req.cookies["userId"];
   if (!id) {
-    res.json({
+    return res.json({
       code: HttpStatus.BusinessError,
     });
   }

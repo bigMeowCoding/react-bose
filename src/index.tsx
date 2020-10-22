@@ -12,6 +12,8 @@ import reducer from "./reducer";
 import AuthRoute from "./component/auth-route/auth-auth";
 import BossInfo from "./container/bossinfo/bossinfo";
 import GeniusInfo from "./container/geniusinfo/geniusinfo";
+import { Switch } from "react-router-dom";
+import { Dashboard } from "./component/dashboard/dashboard";
 const devTool = (window as any).devToolsExtension
   ? (window as any).devToolsExtension()
   : () => {};
@@ -21,10 +23,13 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <AuthRoute></AuthRoute>
-      <Route path="/login" component={Login}></Route>
-      <Route path="/register" component={Register}></Route>
-      <Route path="/bossinfo" component={BossInfo}></Route>
-      <Route path="/geniusinfo" component={GeniusInfo}></Route>
+      <Switch>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component={Register}></Route>
+        <Route path="/bossinfo" component={BossInfo}></Route>
+        <Route path="/geniusinfo" component={GeniusInfo}></Route>
+        <Route component={Dashboard}></Route>
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
