@@ -4,7 +4,10 @@ import { NavbarItem } from "../../common/interface/navbar";
 import { useLocation, useHistory } from "react-router-dom";
 import "./nav-link.scss";
 export function NavLinkBar(props: any) {
-  const { navList } = props;
+  let { navList } = props;
+  navList = navList.filter((item: NavbarItem) => {
+    return !item.hide;
+  });
   const location = useLocation(),
     history = useHistory();
   return (
