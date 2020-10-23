@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { UserType } from "../../common/interface/login-register";
 import { getUserList } from "../../redux/chatuser.action";
+import UserCard from "../user-card/user-card";
 
 function Genius(props: {
   getUserList: (type: string) => void;
@@ -12,7 +13,7 @@ function Genius(props: {
     props.getUserList(UserType.genius);
   }, []);
   const { userList } = props;
-  return <div>genius</div>;
+  return <UserCard userList={userList}></UserCard>;
 }
 function mapStateToProps(state: StoreState) {
   return { userList: state.chatUser.userList };
