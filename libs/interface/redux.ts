@@ -1,5 +1,8 @@
 import { UserState } from "../../src/common/interface/login-register";
-
+import { UserInfo } from "../../src/common/interface/user";
+interface ChatUserState {
+  userList: UserInfo[];
+}
 export interface StoreState {
   counter: number;
   auth: {
@@ -8,4 +11,5 @@ export interface StoreState {
     age: number;
   };
   user: UserState;
+  chatUser: ChatUserState;
 }

@@ -7,8 +7,12 @@ const Router = express.Router();
 const User = model.getModel("user");
 const _filterPwd = { pwd: 0 };
 Router.get("/list", (req, res) => {
-  User.find({}, (err, doc) => {
-    return res.json(doc);
+  const { type } = req.query;
+  User.find({ type }, (err, doc) => {
+    return res.json({
+      code: HttpStatus.Ok,
+      data: doc,
+    });
   });
 });
 
@@ -67,7 +71,7 @@ Router.post("/login", (req, res) => {
   User.findOne(
     { name, pwd: md5PwdEncryption(pwd) },
     _filterPwd,
-    (error, doc:any) => {
+    (error, doc: any) => {
       if (!doc) {
         return res.json({
           code: HttpStatus.BusinessError,

@@ -8,11 +8,9 @@ import { useLocation, Switch, Route } from "react-router-dom";
 import { NavbarItem } from "../../common/interface/navbar";
 import { NavLinkBar } from "../nav-link/nav-link";
 import "./dashboard.scss";
+import Genius from "../genius/genius";
 function Boss() {
   return <div>boss</div>;
-}
-function Genius() {
-  return <div>genius</div>;
 }
 function Msg() {
   return <h2>消息列表页面</h2>;
@@ -54,7 +52,7 @@ function Dashboard(props: any) {
       component: User,
     },
   ];
-  console.log(navList)
+  console.log(navList);
   const location = useLocation();
   return (
     <div className="dashboard">
