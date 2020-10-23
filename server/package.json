@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^5.1.6"
   },
   "dependencies": {
-    "browser-cookies": "^1.2.0"
+    "browser-cookies": "^1.2.0",
+    "socket.io": "^2.3.0"
   }
 }
