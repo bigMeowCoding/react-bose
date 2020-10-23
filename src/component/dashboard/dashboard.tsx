@@ -9,9 +9,8 @@ import { NavbarItem } from "../../common/interface/navbar";
 import { NavLinkBar } from "../nav-link/nav-link";
 import "./dashboard.scss";
 import Genius from "../genius/genius";
-function Boss() {
-  return <div>boss</div>;
-}
+import Boss from "../boss/boss";
+
 function Msg() {
   return <h2>消息列表页面</h2>;
 }

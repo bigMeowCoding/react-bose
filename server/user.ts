@@ -89,7 +89,6 @@ Router.post("/login", (req, res) => {
 });
 
 Router.post("/update", (req, res) => {
-  const { name, pwd, type } = req.body;
   const id = req.cookies["userId"];
   if (!id) {
     return res.json({
