@@ -4,6 +4,7 @@ import {
   ERROR_MSG,
   LOAD_DATA,
   LOGIN_SUCCESS,
+  LOGOUT,
   Minus,
   REGISTER_SUCCESS,
 } from "./actionType";
@@ -91,7 +92,11 @@ export function register(param: UserInfoParam) {
     });
   };
 }
-
+export function logout() {
+  return {
+    type: LOGOUT,
+  };
+}
 export function login(param: UserInfoParam) {
   const { name, pwd, type } = param;
   if (!name || !pwd || !type) {
@@ -101,7 +106,7 @@ export function login(param: UserInfoParam) {
   return (dispatch: any) => {
     // 异步请求
     service.post(`/user/login`, { name, pwd, type }).then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.status === 200 && res.data.code === 0) {
         dispatch(registerSuccess({ name, pwd, type }));
       } else {

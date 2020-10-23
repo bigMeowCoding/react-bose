@@ -4,6 +4,8 @@ import { Brief } from "antd-mobile/es/list/ListItem";
 import { StoreState } from "@lib/interface";
 import { connect } from "react-redux";
 import browserCookie from "browser-cookies";
+import { Redirect } from "react-router-dom";
+import { logout } from "../../redux/action";
 function User(props: any) {
   function logout() {
     const alert = Modal.alert;
@@ -14,7 +16,7 @@ function User(props: any) {
         text: "确认",
         onPress: () => {
           browserCookie.erase("userId");
-          window.location = window.location;
+          props.logout();
         },
       },
     ]);
@@ -56,10 +58,12 @@ function User(props: any) {
         </Item>
       </List>
     </div>
+  ) : user.redirectTo ? (
+    <Redirect to={user.redirectTo}></Redirect>
   ) : null;
 }
 function mapStateToProps(state: StoreState) {
   return { user: state.user };
 }
-const actionCreators = {};
+const actionCreators = { logout };
 export default connect(mapStateToProps, actionCreators)(User);

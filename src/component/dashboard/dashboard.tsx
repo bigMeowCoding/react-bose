@@ -50,7 +50,6 @@ function Dashboard(props: any) {
       component: User,
     },
   ];
-  console.log(navList);
   const location = useLocation();
   return (
     <div className="dashboard">

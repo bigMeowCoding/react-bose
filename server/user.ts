@@ -59,7 +59,6 @@ Router.post("/register", (req, res) => {
         });
       }
       res.cookie("userId", d._id);
-      console.log(d);
       return res.json({
         code: HttpStatus.Ok,
       });

@@ -3,6 +3,7 @@ import {
   ERROR_MSG,
   LOAD_DATA,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_SUCCESS,
 } from "./actionType";
 import {
@@ -36,6 +37,11 @@ export default function user(
       return {
         ...state,
         ...action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...initState,
+        redirectTo: "/login",
       };
     case ERROR_MSG:
       return {

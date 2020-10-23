@@ -9,5 +9,4 @@ export const AUTH_SUCCESS = "authSuccess";
 
 export const ERROR_MSG = "errorMsg";
 export const LOAD_DATA = "loadData";
-
 export const USER_LIST = "userList";
