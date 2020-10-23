@@ -16,6 +16,7 @@ export interface UserState {
   msg: string;
   isAuth: boolean;
   redirectTo: string;
+  _id?: string;
 }
 
 export interface PerfectUserInfoParam {

@@ -20,8 +20,14 @@ const models = {
     company: { type: String },
     money: { type: String },
   },
-  chat: {},
-};
+  chat:{
+    'chatId':{'type':String, require:true},
+    'from':{'type':String,'require':true},
+    'to':{'type':String,'require':true},
+    'read':{'type':Boolean,default:false},
+    'content':{'type':String,'require':true,'default':''},
+    'create_time':{'type':Number,'default':Date.now}
+  }};
 // mongoose.connection.on("connected", () => {
 //     console.log("connect");
 // });
