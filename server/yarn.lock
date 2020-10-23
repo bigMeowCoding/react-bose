@@ -37,6 +37,11 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+browser-cookies@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/browser-cookies/download/browser-cookies-1.2.0.tgz#fca3ffb9b6a63aadc4d8c0999c6b57d0fa7d29b5"
+  integrity sha1-/KP/ubamOq3E2MCZnGtX0Pp9KbU=
+
 csstype@^3.0.2:
   version "3.0.3"
   resolved "https://registry.npm.taobao.org/csstype/download/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"

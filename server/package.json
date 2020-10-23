@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/react-router-dom": "^5.1.6"
+  },
+  "dependencies": {
+    "browser-cookies": "^1.2.0"
   }
 }
