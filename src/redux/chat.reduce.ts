@@ -13,14 +13,17 @@ export function chat(state = initState, action: any) {
         ...state,
         chatMsg: action.payload.chatMsg,
         users: action.payload.users,
-        unread: action.payload.chatMsg.filter((v: any) => !v.read).length,
+        unread: action.payload.chatMsg.filter((v: any) => {
+          return !v.read && v.to === action.payload.userId;
+        }).length,
       };
 
     case MSG_RECV:
+      const n = action.payload.content.to === action.payload.userId ? 1 : 0;
       return {
         ...state,
         chatMsg: [...state.chatMsg, action.payload.content],
-        unread: state.unread + 1,
+        unread: state.unread + n,
       };
     default:
       return state;

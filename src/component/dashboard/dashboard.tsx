@@ -53,8 +53,10 @@ function Dashboard(props: any) {
   ];
   const location = useLocation();
   useEffect(() => {
-    props.getMsgList();
-    props.recvMsg();
+    if (!props.chat?.chatMsg.length) {
+      props.getMsgList();
+      props.recvMsg();
+    }
   }, []);
   return (
     <div className="dashboard">
@@ -74,7 +76,7 @@ function Dashboard(props: any) {
 }
 
 function mapStateToProps(state: StoreState) {
-  return { user: state.user };
+  return { user: state.user, chat: state.chat };
 }
 const actionCreators = {
   loadData,

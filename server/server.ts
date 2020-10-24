@@ -19,15 +19,9 @@ io.on("connection", function (socket: any) {
     // console.log(IIdata)
     const { from, to, msg } = data;
     const chatId = [from, to].sort().join("_");
-    Chat.create({ chatId, from, to, content: msg }, function (err, doc) {
-      io.emit("recvmsg", {
-        from,
-        to,
-        content: msg,
-      });
+    Chat.create({ chatId, from, to, content: msg }, function (err, doc: any) {
+      io.emit("recvmsg", Object.assign({}, doc._doc));
     });
-    // console.log(data)
-    // io.emit('recvmsg',data)
   });
 });
 server.listen(9093, () => {

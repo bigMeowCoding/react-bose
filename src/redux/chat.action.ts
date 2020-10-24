@@ -20,35 +20,37 @@ export function sendMsg({
 }
 
 export function recvMsg() {
-  return (dispatch: any) => {
+  return (dispatch: any, getState: any) => {
     socket.on("recvmsg", function (data: any) {
-      console.log(data)
-      dispatch(msgRecv(data));
+      const userId = getState().user._id;
+      dispatch(msgRecv(data, userId));
     });
   };
 }
-function msgList(msgs: string, users: any[]) {
+function msgList(msgs: string, users: any[], userId: string) {
   return {
     type: MSG_LIST,
     payload: {
       chatMsg: msgs,
       users,
+      userId,
     },
   };
 }
-function msgRecv(msg: string) {
+function msgRecv(msg: string, userId: string) {
   return {
     type: MSG_RECV,
     payload: {
       content: msg,
+      userId,
     },
   };
 }
 export function getMsgList() {
-  return (dispatch: any) => {
+  return (dispatch: any, getState: any) => {
     service.get("/user/getmsglist").then((res) => {
       if (res.status == 200 && res.data.code == HttpStatus.Ok) {
-        dispatch(msgList(res.data.msgs, res.data.users));
+        dispatch(msgList(res.data.msgs, res.data.users, getState().user._id));
       }
     });
   };

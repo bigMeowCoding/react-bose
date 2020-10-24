@@ -1,11 +1,11 @@
 import { Icon, InputItem, List, NavBar } from "antd-mobile";
 import React, { useEffect, useState } from "react";
 import { ChatState, StoreState } from "@lib/interface";
-import { register } from "../../redux/action";
 import { connect } from "react-redux";
 import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
-import { useLocation, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { UserState } from "../../common/interface/login-register";
+import { getChatId } from "../../common/utils/chat";
 
 function Chat(props: {
   sendMsg: Function;
@@ -17,6 +17,7 @@ function Chat(props: {
   const history = useHistory();
   const [message, setMessage] = useState({ text: "", msg: [] });
   const { user: userId } = useParams();
+  const currentUserId = props.user._id;
   useEffect(() => {
     if (!chat.chatMsg.length) {
       props.getMsgList();
@@ -38,6 +39,10 @@ function Chat(props: {
   if (!users[userId]) {
     return null;
   }
+  const chatId = getChatId(userId, currentUserId || "");
+  const chatMsgs = chat.chatMsg.filter((c) => {
+    return c.chatId === chatId;
+  });
   return (
     <div id="chat-page">
       <NavBar
@@ -49,7 +54,7 @@ function Chat(props: {
       >
         {chat.users[userId]?.name}
       </NavBar>
-      {chat.chatMsg.map((v) => {
+      {chatMsgs.map((v) => {
         const avatar = require(`../../common/images/${
           chat.users[v.from].avatar
         }.png`);
