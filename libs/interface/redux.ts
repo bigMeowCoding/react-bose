@@ -6,6 +6,7 @@ interface ChatUserState {
 export interface ChatState {
   chatMsg: any[];
   unread: number;
+  users:any[]
 }
 export interface StoreState {
   counter: number;

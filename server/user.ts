@@ -116,16 +116,15 @@ Router.get("/getmsglist", function (req, res) {
   const user = req.cookies.userId;
 
   User.find({}, function (e, userdoc) {
-    let users = {};
-    // userdoc.forEach(v=>{
-    //   users[v._id] = {name:v.user, avatar:v.avatar}
-    // })
+    let users: any = {};
+    userdoc.forEach((v: any) => {
+      users[v._id] = { name: v.name, avatar: v.avatar };
+    });
     Chat.find({ $or: [{ from: user }, { to: user }] }, function (err, doc) {
       if (!err) {
-        return res.json({ code: 0, msgs: doc });
+        return res.json({ code: 0, msgs: doc, users });
       }
     });
   });
-  // {'$or':[{from:user,to:user}]}
 });
 export default Router;

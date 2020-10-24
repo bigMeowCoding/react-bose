@@ -3,6 +3,7 @@ import { ChatState } from "@lib/interface";
 const initState: ChatState = {
   chatMsg: [],
   unread: 0,
+  users: [],
 };
 
 export function chat(state = initState, action: any) {
@@ -10,14 +11,15 @@ export function chat(state = initState, action: any) {
     case MSG_LIST:
       return {
         ...state,
-        chatMsg: action.payload,
-        unread: action.payload.filter((v: any) => !v.read).length,
+        chatMsg: action.payload.chatMsg,
+        users: action.payload.users,
+        unread: action.payload.chatMsg.filter((v: any) => !v.read).length,
       };
 
     case MSG_RECV:
       return {
         ...state,
-        chatMsg: [...state.chatMsg, action.payload],
+        chatMsg: [...state.chatMsg, action.payload.content],
         unread: state.unread + 1,
       };
     default:

@@ -15,11 +15,11 @@ function Chat(props: {
   recvMsg: Function;
 }) {
   const [message, setMessage] = useState({ text: "", msg: [] });
-  const { user } = useParams();
+  const { user: userId } = useParams();
   function submitHandle() {
     props.sendMsg({
       from: props.user._id,
-      to: user,
+      to: userId,
       msg: message.text,
     });
     setMessage({ ...message, text: "" });
@@ -27,20 +27,27 @@ function Chat(props: {
 
   const { chat } = props;
   const Item = List.Item;
-
+  const users = props.chat.users;
+  if (!users[userId]) {
+    return null;
+  }
   return (
     <div id="chat-page">
       <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => {}}>
-        {user}
+        {chat.users[userId].name}
       </NavBar>
       {chat.chatMsg.map((v) => {
-        return v.from == user ? (
+        const avatar = require(`../../common/images/${
+          chat.users[v.from].avatar
+        }.png`);
+
+        return v.from == userId ? (
           <List key={v._id}>
-            <Item>{v.content}</Item>
+            <Item thumb={avatar}>{v.content}</Item>
           </List>
         ) : (
           <List key={v._id}>
-            <Item extra={<img alt="头像" />} className="chat-me">
+            <Item extra={<img alt="头像" src={avatar} />} className="chat-me">
               {v.content}
             </Item>
           </List>
@@ -74,5 +81,5 @@ function mapStateToProps(state: StoreState) {
     chat: state.chat,
   };
 }
-const actionCreators = { sendMsg,  };
+const actionCreators = { sendMsg };
 export default connect(mapStateToProps, actionCreators)(Chat);

@@ -22,21 +22,33 @@ export function sendMsg({
 export function recvMsg() {
   return (dispatch: any) => {
     socket.on("recvmsg", function (data: any) {
+      console.log(data)
       dispatch(msgRecv(data));
     });
   };
 }
-function msgList(msgs: string) {
-  return { type: MSG_LIST, payload: msgs };
+function msgList(msgs: string, users: any[]) {
+  return {
+    type: MSG_LIST,
+    payload: {
+      chatMsg: msgs,
+      users,
+    },
+  };
 }
 function msgRecv(msg: string) {
-  return { type: MSG_RECV, payload: msg };
+  return {
+    type: MSG_RECV,
+    payload: {
+      content: msg,
+    },
+  };
 }
 export function getMsgList() {
   return (dispatch: any) => {
     service.get("/user/getmsglist").then((res) => {
       if (res.status == 200 && res.data.code == HttpStatus.Ok) {
-        dispatch(msgList(res.data.msgs));
+        dispatch(msgList(res.data.msgs, res.data.users));
       }
     });
   };
