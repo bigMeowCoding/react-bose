@@ -1,4 +1,4 @@
-import { Icon, InputItem, List, NavBar } from "antd-mobile";
+import { Grid, Icon, InputItem, List, NavBar } from "antd-mobile";
 import React, { useEffect, useState } from "react";
 import { ChatState, StoreState } from "@lib/interface";
 import { connect } from "react-redux";
@@ -6,6 +6,7 @@ import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
 import { useParams, useHistory } from "react-router-dom";
 import { UserState } from "../../common/interface/login-register";
 import { getChatId } from "../../common/utils/chat";
+import { fixCarousel } from "../../common/utils/fix-bug";
 
 function Chat(props: {
   sendMsg: Function;
@@ -16,6 +17,7 @@ function Chat(props: {
 }) {
   const history = useHistory();
   const [message, setMessage] = useState({ text: "", msg: [] });
+  const [showEmoji, changeShowEmoji] = useState(false);
   const { user: userId } = useParams();
   const currentUserId = props.user._id;
   useEffect(() => {
@@ -43,6 +45,11 @@ function Chat(props: {
   const chatMsgs = chat.chatMsg.filter((c) => {
     return c.chatId === chatId;
   });
+  const emoji = "😀 😃 😄 😁 😆 😅 😂 😊 😇 🙂 🙃 😉 😌 😍 😘 😗 😙 😚 😋 😜 😝 😛 🤑 🤗 🤓 😎 😏 😒 😞 😔 😟 😕 🙁 😣 😖 😫 😩 😤 😠 😡 😶 😐 😑 😯 😦 😧 😮 😲 😵 😳 😱 😨 😰 😢 😥 😭 😓 😪 😴 🙄 🤔 😬 🤐 😷 🤒 🤕 😈 👿 👹 👺 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾 👐 🙌 👏 🙏 👍 👎 👊 ✊ 🤘 👌 👈 👉 👆 👇 ✋  🖐 🖖 👋  💪 🖕 ✍️  💅 🖖 💄 💋 👄 👅 👂 👃 👁 👀 "
+    .split(" ")
+    .filter((v) => v)
+    .map((v) => ({ text: v }));
+
   return (
     <div id="chat-page">
       <NavBar
@@ -84,11 +91,34 @@ function Chat(props: {
             }}
             extra={
               <div>
+                <span
+                  style={{ marginRight: 15 }}
+                  onClick={() => {
+                    changeShowEmoji(!showEmoji);
+                    fixCarousel();
+                  }}
+                >
+                  😃
+                </span>
                 <span onClick={() => submitHandle()}>发送</span>
               </div>
             }
           ></InputItem>
         </List>
+        {showEmoji ? (
+          <Grid
+            data={emoji}
+            columnNum={9}
+            carouselMaxRow={4}
+            isCarousel={true}
+            onClick={(el: any) => {
+              setMessage({
+                ...message,
+                text: message.text + el.text,
+              });
+            }}
+          />
+        ) : null}
       </div>
     </div>
   );
