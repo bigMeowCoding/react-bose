@@ -4,7 +4,7 @@ import { ChatState, StoreState } from "@lib/interface";
 import { register } from "../../redux/action";
 import { connect } from "react-redux";
 import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useHistory } from "react-router-dom";
 import { UserState } from "../../common/interface/login-register";
 
 function Chat(props: {
@@ -14,8 +14,15 @@ function Chat(props: {
   getMsgList: Function;
   recvMsg: Function;
 }) {
+  const history = useHistory();
   const [message, setMessage] = useState({ text: "", msg: [] });
   const { user: userId } = useParams();
+  useEffect(() => {
+    if (!chat.chatMsg.length) {
+      props.getMsgList();
+      props.recvMsg();
+    }
+  }, []);
   function submitHandle() {
     props.sendMsg({
       from: props.user._id,
@@ -33,8 +40,14 @@ function Chat(props: {
   }
   return (
     <div id="chat-page">
-      <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => {}}>
-        {chat.users[userId].name}
+      <NavBar
+        mode="dark"
+        icon={<Icon type="left" />}
+        onLeftClick={() => {
+          history.goBack();
+        }}
+      >
+        {chat.users[userId]?.name}
       </NavBar>
       {chat.chatMsg.map((v) => {
         const avatar = require(`../../common/images/${
@@ -81,5 +94,5 @@ function mapStateToProps(state: StoreState) {
     chat: state.chat,
   };
 }
-const actionCreators = { sendMsg };
+const actionCreators = { sendMsg, recvMsg, getMsgList };
 export default connect(mapStateToProps, actionCreators)(Chat);
