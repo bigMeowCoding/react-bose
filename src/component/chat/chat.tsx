@@ -24,10 +24,7 @@ function Chat(props: {
     });
     setMessage({ ...message, text: "" });
   }
-  useEffect(() => {
-    props.getMsgList();
-    props.recvMsg();
-  }, []);
+
   const { chat } = props;
   const Item = List.Item;
 
@@ -77,5 +74,5 @@ function mapStateToProps(state: StoreState) {
     chat: state.chat,
   };
 }
-const actionCreators = { getMsgList, sendMsg, recvMsg };
+const actionCreators = { sendMsg,  };
 export default connect(mapStateToProps, actionCreators)(Chat);

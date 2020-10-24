@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StoreState } from "@lib/interface";
 import { loadData } from "../../redux/action";
 import { connect } from "react-redux";
@@ -6,11 +6,12 @@ import { UserType } from "../../common/interface/login-register";
 import { NavBar } from "antd-mobile";
 import { useLocation, Switch, Route } from "react-router-dom";
 import { NavbarItem } from "../../common/interface/navbar";
-import { NavLinkBar } from "../nav-link/nav-link";
+import NavLinkBar from "../nav-link/nav-link";
 import "./dashboard.scss";
 import Genius from "../genius/genius";
 import Boss from "../boss/boss";
 import User from "../user/user";
+import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
 
 function Msg() {
   return <h2>消息列表页面</h2>;
@@ -51,6 +52,10 @@ function Dashboard(props: any) {
     },
   ];
   const location = useLocation();
+  useEffect(() => {
+    props.getMsgList();
+    props.recvMsg();
+  }, []);
   return (
     <div className="dashboard">
       <NavBar mode="dark">
@@ -73,6 +78,8 @@ function mapStateToProps(state: StoreState) {
 }
 const actionCreators = {
   loadData,
+  recvMsg,
+  getMsgList,
 };
 
 export default connect(mapStateToProps, actionCreators)(Dashboard);
