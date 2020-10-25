@@ -12,10 +12,7 @@ import Genius from "../genius/genius";
 import Boss from "../boss/boss";
 import User from "../user/user";
 import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
-
-function Msg() {
-  return <h2>消息列表页面</h2>;
-}
+import Msg from "../msg/msg";
 
 function Dashboard(props: any) {
   const user = props.user;
