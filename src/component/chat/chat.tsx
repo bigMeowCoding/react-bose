@@ -2,7 +2,7 @@ import { Grid, Icon, InputItem, List, NavBar } from "antd-mobile";
 import React, { useEffect, useState } from "react";
 import { ChatState, StoreState } from "@lib/interface";
 import { connect } from "react-redux";
-import { getMsgList, recvMsg, sendMsg } from "../../redux/chat.action";
+import { getMsgList, readMsg, recvMsg, sendMsg } from "../../redux/chat.action";
 import { useParams, useHistory } from "react-router-dom";
 import { UserState } from "../../common/interface/login-register";
 import { getChatId } from "../../common/utils/chat";
@@ -14,6 +14,7 @@ function Chat(props: {
   chat: ChatState;
   getMsgList: Function;
   recvMsg: Function;
+  readMsg: Function;
 }) {
   const history = useHistory();
   const [message, setMessage] = useState({ text: "", msg: [] });
@@ -25,6 +26,9 @@ function Chat(props: {
       props.getMsgList();
       props.recvMsg();
     }
+    return () => {
+      props.readMsg(userId);
+    };
   }, []);
   function submitHandle() {
     props.sendMsg({
@@ -129,5 +133,5 @@ function mapStateToProps(state: StoreState) {
     chat: state.chat,
   };
 }
-const actionCreators = { sendMsg, recvMsg, getMsgList };
+const actionCreators = { sendMsg, recvMsg, getMsgList, readMsg };
 export default connect(mapStateToProps, actionCreators)(Chat);

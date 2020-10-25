@@ -1,6 +1,6 @@
 import { service } from "../http-util/axios";
 import { HttpStatus } from "../common/interface/http";
-import { MSG_LIST, MSG_RECV } from "./actionType";
+import { MSG_LIST, MSG_READ, MSG_RECV } from "./actionType";
 
 const io = require("socket.io-client");
 const socket = io("ws://localhost:9093");
@@ -35,6 +35,28 @@ function msgList(msgs: string, users: any[], userId: string) {
       users,
       userId,
     },
+  };
+}
+function msgRead({
+  to,
+  userId,
+  num,
+}: {
+  to: string;
+  userId: string;
+  num: number;
+}) {
+  return { type: MSG_READ, payload: { to, userId, num } };
+}
+
+export function readMsg(to: string) {
+  return (dispatch: any, getState: any) => {
+    service.post("/user/readmsg", { to }).then((res) => {
+      const userId = getState().user._id;
+      if (res.status == 200 && res.data.code == 0) {
+        dispatch(msgRead({ userId, to, num: res.data.num }));
+      }
+    });
   };
 }
 function msgRecv(msg: string, userId: string) {

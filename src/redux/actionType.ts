@@ -14,3 +14,4 @@ export const USER_LIST = "userList";
 export const MSG_LIST = "msgList";
 export const MSG_RECV = "msgRecv";
 export const MSG_SEND = "msgSend";
+export const MSG_READ = "msgRead";
