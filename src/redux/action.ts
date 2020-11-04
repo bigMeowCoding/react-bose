@@ -106,9 +106,8 @@ export function login(param: UserInfoParam) {
   return (dispatch: any) => {
     // 异步请求
     service.post(`/user/login`, { name, pwd, type }).then((res) => {
-      console.log(res);
       if (res.status === 200 && res.data.code === 0) {
-        dispatch(registerSuccess({ name, pwd, type }));
+        dispatch(registerSuccess({ ...res.data.data, pwd }));
       } else {
         dispatch(errorMessage(res.data.msg));
       }
