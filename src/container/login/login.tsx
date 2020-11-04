@@ -4,7 +4,7 @@ import { Button, InputItem, List, WhiteSpace } from "antd-mobile";
 import { Redirect, useHistory } from "react-router-dom";
 import { UserInfoParam } from "../../common/interface/login-register";
 import { StoreState } from "@lib/interface";
-import { login } from "../../redux/action";
+import { login, toRegister } from "../../redux/action";
 import { connect } from "react-redux";
 
 function Login(props: any) {
@@ -14,6 +14,7 @@ function Login(props: any) {
     repeatPwd: "",
   });
   function register() {
+    props.toRegister();
     history.push("/register");
   }
   function loginHandle(param: any) {
@@ -49,9 +50,9 @@ function Login(props: any) {
         </InputItem>{" "}
       </List>
       <WhiteSpace />
-        {props.user && props.user.msg ? (
-            <p className={"error-message"}>{props.user.msg}</p>
-        ) : null}
+      {props.user && props.user.msg ? (
+        <p className={"error-message"}>{props.user.msg}</p>
+      ) : null}
       <Button
         type="primary"
         onClick={() => {
@@ -72,5 +73,6 @@ function mapStateToProps(state: StoreState) {
 }
 const actionCreators = {
   login,
+  toRegister,
 };
 export default connect(mapStateToProps, actionCreators)(Login);

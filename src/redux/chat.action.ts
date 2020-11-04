@@ -1,6 +1,6 @@
 import { service } from "../http-util/axios";
 import { HttpStatus } from "../common/interface/http";
-import { MSG_LIST, MSG_READ, MSG_RECV } from "./actionType";
+import { MSG_CLEAR, MSG_LIST, MSG_READ, MSG_RECV } from "./actionType";
 
 const io = require("socket.io-client");
 const socket = io("ws://localhost:9093");
@@ -66,6 +66,11 @@ function msgRecv(msg: string, userId: string) {
       content: msg,
       userId,
     },
+  };
+}
+export function msgClear() {
+  return {
+    type: MSG_CLEAR,
   };
 }
 export function getMsgList() {

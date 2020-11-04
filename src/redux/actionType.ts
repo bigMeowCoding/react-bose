@@ -2,6 +2,7 @@ export const Add = "add";
 export const Minus = "minus";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+export const TO_REGISTER = "TO_REGISTER";
 
 export const REGISTER_SUCCESS = "success";
 export const LOGIN_SUCCESS = "loginSuccess";
@@ -15,3 +16,4 @@ export const MSG_LIST = "msgList";
 export const MSG_RECV = "msgRecv";
 export const MSG_SEND = "msgSend";
 export const MSG_READ = "msgRead";
+export const MSG_CLEAR = "msgClear";

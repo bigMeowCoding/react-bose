@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "./actionType";
+import { LOGIN, LOGOUT, TO_REGISTER } from "./actionType";
 
 const initState = {
   isAuth: false,
@@ -20,6 +20,11 @@ export function auth(
       return {
         ...state,
         isAuth: false,
+      };
+    case TO_REGISTER:
+      return {
+        ...state,
+        redirectTo: "",
       };
     default:
       return state;

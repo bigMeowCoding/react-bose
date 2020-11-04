@@ -18,7 +18,7 @@ function Dashboard(props: any) {
   const user = props.user;
   const navList: NavbarItem[] = [
     {
-      path: "/genius",
+      path: "/boss",
       text: "牛人",
       icon: "boss",
       title: "牛人列表",
@@ -26,7 +26,7 @@ function Dashboard(props: any) {
       hide: user.type === UserType.genius,
     },
     {
-      path: "/boss",
+      path: "/genius",
       text: "boss",
       icon: "job",
       title: "BOSS列表",

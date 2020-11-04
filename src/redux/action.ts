@@ -7,6 +7,7 @@ import {
   LOGOUT,
   Minus,
   REGISTER_SUCCESS,
+  TO_REGISTER,
 } from "./actionType";
 import {
   PerfectUserInfoParam,
@@ -112,6 +113,11 @@ export function login(param: UserInfoParam) {
         dispatch(errorMessage(res.data.msg));
       }
     });
+  };
+}
+export function toRegister() {
+  return {
+    type: TO_REGISTER,
   };
 }
 export function loadData(data: any) {

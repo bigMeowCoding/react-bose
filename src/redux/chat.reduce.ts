@@ -1,4 +1,5 @@
 import {
+  MSG_CLEAR,
   MSG_LIST,
   MSG_READ,
   MSG_RECV,
@@ -39,6 +40,11 @@ export function chat(state = initState, action: any) {
         ...state,
         chatMsg: [...state.chatMsg, action.payload.content],
         unread: state.unread + n,
+      };
+    case MSG_CLEAR:
+      return {
+        ...state,
+        chatMsg: [],
       };
     default:
       return state;

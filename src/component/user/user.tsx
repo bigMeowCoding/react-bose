@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import browserCookie from "browser-cookies";
 import { Redirect } from "react-router-dom";
 import { logout } from "../../redux/action";
+import { msgClear } from "../../redux/chat.action";
 function User(props: any) {
   function logout() {
     const alert = Modal.alert;
@@ -17,6 +18,7 @@ function User(props: any) {
         onPress: () => {
           browserCookie.erase("userId");
           props.logout();
+          props.msgClear();
         },
       },
     ]);
@@ -65,5 +67,5 @@ function User(props: any) {
 function mapStateToProps(state: StoreState) {
   return { user: state.user };
 }
-const actionCreators = { logout };
+const actionCreators = { logout, msgClear };
 export default connect(mapStateToProps, actionCreators)(User);
